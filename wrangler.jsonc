@@ -1,0 +1,14 @@
+// Cloudflare Workers: sitio 100% estático. `npm run build` genera dist/ (HTML
+// prerenderizado por ruta) y wrangler solo lo publica, sin código de servidor.
+{
+  "name": "blur-branding",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /services se sirve desde dist/services/index.html, sin barra final
+    // (igual que las URLs canónicas y las del sitio original)
+    "html_handling": "drop-trailing-slash",
+    // Rutas inexistentes: dist/404.html con estado 404 real (bueno para SEO)
+    "not_found_handling": "404-page"
+  }
+}

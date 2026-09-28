@@ -1,2 +1,0 @@
-# Netlify: los HTML prerenderizados se sirven primero; lo demás cae al shell SPA.
-/*    /app.html    200

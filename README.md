@@ -22,7 +22,11 @@ Genera `dist/` con:
 - HTML estático por ruta (inicio, servicios, quiénes somos, portafolio, pantalla LED, contacto, 11 proyectos y páginas legales), con título, descripción, canonical, Open Graph, Twitter y JSON-LD (negocio local, breadcrumbs, servicios y proyectos).
 - Imágenes Open Graph 1200x630, `sitemap.xml`, `robots.txt`, `404.html` y `app.html` (shell SPA para rutas no prerenderizadas).
 
-`vercel.json` y `public/_redirects` ya incluyen la configuración para Vercel y Netlify.
+## Despliegue
+
+- **Cloudflare Workers** (`wrangler.jsonc`): comando de compilación `npm run build`, comando de despliegue `npx wrangler deploy`. Publica `dist/` como sitio estático; las rutas inexistentes devuelven `404.html`. Caché de medios en `public/_headers`.
+- **Vercel**: `vercel.json`.
+- Node 22 (`.node-version`).
 
 ## Medios
 
