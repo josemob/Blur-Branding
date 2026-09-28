@@ -25,32 +25,39 @@ function Hero() {
       // Gradiente radial del original: teal de marca que se funde en casi negro.
       style={{ background: "radial-gradient(93% 245% at 61.4% 66.9%, rgb(90,132,144) 0%, rgb(7,7,5) 100%)" }}
     >
-      {/* Decoración: billboard pegado a la derecha, 50vw en desktop, esquina sup-izq 16px */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-full overflow-hidden lg:w-[50vw] lg:rounded-tl-2xl">
-        <motion.img
-          src={bill.src}
-          srcSet={bill.srcSet}
-          sizes={SIZES.half}
-          alt=""
-          fetchPriority="high"
-          className="h-full w-full object-cover object-[70%_center] lg:object-center"
-          initial={{ scale: 1.08, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.6, ease: EASE }}
-        />
-        {/* Velo solo para legibilidad: fuerte en móvil (texto encima), sutil en desktop */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(7,7,5,0.8)] via-[rgba(7,7,5,0.45)] to-transparent lg:from-[rgba(7,7,5,0.3)] lg:via-transparent" />
-      </div>
+      {/* Billboard (PNG recortado, fondo transparente) completo, sin caja ni recorte, anclado abajo.
+          Medidas del original: móvil 640px de ancho desde x=62; tablet alto = viewport - 74px;
+          desktop pegado a la derecha, alto = viewport - 117px. Lo que sobresale se recorta. */}
+      <motion.img
+        src={bill.src}
+        srcSet={bill.srcSet}
+        sizes="(min-width: 1024px) 60vw, (min-width: 768px) 135vw, 640px"
+        width={bill.width}
+        height={bill.height}
+        alt=""
+        aria-hidden
+        fetchPriority="high"
+        className="pointer-events-none absolute bottom-0 left-[62px] aspect-[2860/2668] w-[640px] max-w-none object-contain md:top-[74px] md:h-[calc(100%-74px)] md:w-auto lg:left-auto lg:right-0 lg:top-[117px] lg:h-[calc(100%-117px)]"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.4, ease: EASE }}
+      />
+      {/* En móvil y tablet el texto va sobre el billboard: velo suave para legibilidad */}
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[rgba(7,7,5,0.6)] via-[rgba(7,7,5,0.3)] to-transparent lg:hidden" />
 
-      <div className="container-x relative flex min-h-[100dvh] flex-col justify-center pb-28 pt-24">
-        <div className="max-w-xl lg:max-w-[52vw]">
-          <motion.h1 {...enter(0.15)} className="text-[clamp(2.4rem,4vw,3.9rem)] font-medium leading-[1.06] tracking-tight text-white">
+      <div className="relative flex min-h-[100dvh] flex-col justify-center px-5 pb-28 pt-24 lg:px-[60px] lg:pb-20 lg:pt-[140px]">
+        <div>
+          {/* Original: 38px/45px en móvil y tablet; 66px/63px en desktop en un bloque de ~49vw (3 líneas) */}
+          <motion.h1
+            {...enter(0.15)}
+            className="text-[38px] font-normal leading-[45px] text-white lg:max-w-[49vw] lg:text-[clamp(3rem,4.6vw,4.125rem)] lg:leading-[0.955]"
+          >
             Estrategia, branding y producción audiovisual <span className="font-bold">sin fronteras</span>
           </motion.h1>
-          <motion.p {...enter(0.3)} className="mt-6 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
+          <motion.p {...enter(0.3)} className="mt-5 max-w-[874px] text-[15px] font-medium leading-[1.33] text-white/90">
             Estudio Creativo 360 que impulsa marcas desde el branding estratégico hasta la publicidad de alto impacto.
           </motion.p>
-          <motion.div {...enter(0.45)} className="mt-9">
+          <motion.div {...enter(0.45)} className="mt-10">
             <Button to="/contacto">Contáctanos</Button>
           </motion.div>
         </div>
