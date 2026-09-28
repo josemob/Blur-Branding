@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Crosshair, Eye, ArrowsClockwise, Check, WhatsappLogo, EnvelopeSimple, MapPin, MapTrifold } from "@phosphor-icons/react";
-import PageHero from "../components/PageHero";
-import { Button, Img, Reveal } from "../components/ui";
+import { motion } from "motion/react";
+import { ArrowDown, Crosshair, Eye, ArrowsClockwise, Check, WhatsappLogo, EnvelopeSimple, MapPin, MapTrifold } from "@phosphor-icons/react";
+import { Button, EASE, Img, Reveal } from "../components/ui";
 import { contact, images, led, videos } from "../data/site";
 import { media, mediaVideo, SIZES } from "../lib/media";
 
@@ -30,18 +30,87 @@ function BgVideo({ src, poster, className = "" }: { src: string; poster?: string
   );
 }
 
+const enter = (d: number) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, delay: d, ease: EASE },
+});
+
+/**
+ * Header propio de Valla LED (medidas del original): 550px de alto, foto del
+ * billboard y degradado que funde a teal abajo; título en dos pesos a la
+ * izquierda, bajada y flecha hacia el contenido a la derecha.
+ */
+function LedHero() {
+  const m = media(images.ledHero);
+  const bill = media(images.ledPoster);
+  return (
+    <section className="relative h-[550px] overflow-hidden bg-brand-dark">
+      <motion.img
+        src={m.src}
+        srcSet={m.srcSet}
+        sizes="100vw"
+        width={m.width}
+        height={m.height}
+        alt=""
+        aria-hidden
+        fetchPriority="high"
+        className="absolute inset-x-0 top-0 h-[728px] w-full object-cover"
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease: EASE }}
+      />
+      {/* Billboard recortado (PNG transparente) sobre la foto de la ciudad: caja fija 608x600
+          como el original, desplazada del centro según el ancho (móvil, tablet, desktop). */}
+      <motion.img
+        src={bill.src}
+        srcSet={bill.srcSet}
+        sizes="608px"
+        width={bill.width}
+        height={bill.height}
+        alt="Valla LED de BLUR con el anuncio «Si lo estás viendo es porque funciona»"
+        fetchPriority="high"
+        className="absolute left-[calc(50%-344px)] top-[105px] h-[600px] w-[608px] max-w-none object-cover md:left-[calc(50%-162px)] lg:left-[calc(50%-112px)] lg:top-16"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.1, ease: EASE }}
+      />
+      <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(rgba(84,84,84,0) 53%, rgb(92,133,146) 100%)" }} />
+      {/* En móvil/tablet el texto cae sobre el cartel blanco: velo teal oscuro extra para legibilidad */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[rgba(27,42,46,0.85)] via-[rgba(27,42,46,0.45)] to-transparent lg:hidden" />
+
+      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 px-[34px] pb-[34px] lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <motion.h1 {...enter(0.1)} className="text-white">
+          <span className="block text-[20px] font-normal leading-[1.1] lg:text-[36px]">Impulsa tu marca al máximo nivel:</span>
+          <span className="mt-0.5 block text-[26px] font-bold leading-[1.1] lg:text-[42px]">
+            Estrategia, creatividad y resultados.
+          </span>
+        </motion.h1>
+        <motion.div {...enter(0.25)} className="flex items-end justify-between gap-6 lg:gap-12">
+          <p className="max-w-[594px] text-[15px] font-medium leading-[1.33] text-white lg:max-w-[398px]">
+            Ofrecemos soluciones 360, desde la concepción de tu identidad hasta la ejecución de campañas digitales y de
+            alto impacto local.
+          </p>
+          <a
+            href="#por-que-led"
+            aria-label="Ir al contenido"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white transition-colors hover:bg-white/15"
+          >
+            <ArrowDown size={24} weight="bold" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function PantallaLed() {
   return (
     <>
-      <PageHero
-        image={images.ledHero}
-        kicker="Impulsa tu marca al máximo nivel:"
-        title="Publicidad LED en Ciudad Guayana."
-        text="Ofrecemos soluciones 360, desde la concepción de tu identidad hasta la ejecución de campañas digitales y de alto impacto local."
-      />
+      <LedHero />
 
       {/* Por qué elegir LED */}
-      <section className="bg-surface-base py-20 md:py-28">
+      <section id="por-que-led" className="scroll-mt-20 bg-surface-base py-20 md:py-28">
         <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-6">
             <h2 className="text-[clamp(2rem,3.8vw,3.2rem)] font-medium leading-[1.06] text-brand-ink">
