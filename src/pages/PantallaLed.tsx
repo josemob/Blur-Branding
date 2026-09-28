@@ -51,15 +51,21 @@ export default function PantallaLed() {
               Llega a miles de clientes potenciales diariamente en los puntos más concurridos de Ciudad Guayana. La
               solución más rápida para el reconocimiento masivo de tu negocio.
             </p>
-            <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <ul className="mt-10 space-y-3">
               {led.benefits.map((b, i) => {
                 const Icon = benefitIcons[i];
                 return (
-                  <li key={b} className="flex items-start gap-3 sm:flex-col">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-teal/10 text-brand-teal">
-                      <Icon size={24} weight="duotone" />
+                  <li
+                    key={b.title}
+                    className="flex items-start gap-4 rounded-2xl bg-white p-5 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(27,42,46,0.45)] md:p-6"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-teal text-white">
+                      <Icon size={24} weight="bold" />
                     </span>
-                    <span className="text-[15px] font-medium leading-snug text-brand-ink">{b}</span>
+                    <span>
+                      <span className="block text-lg font-semibold leading-snug text-brand-ink">{b.title}</span>
+                      <span className="mt-1 block text-[15px] leading-relaxed text-black/60">{b.text}</span>
+                    </span>
                   </li>
                 );
               })}

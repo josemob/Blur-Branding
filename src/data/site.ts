@@ -88,7 +88,11 @@ export const clientLogos = [
 
 /* ---------- Valla LED ---------- */
 export const led = {
-  benefits: ["Ubicación estratégica (tráfico alto)", "Máxima visibilidad (24/7)", "Flexibilidad (cambia tu anuncio rápido)"],
+  benefits: [
+    { title: "Ubicación estratégica", text: "En Alta Vista, con tráfico lento y flujo peatonal constante en el corazón de Puerto Ordaz." },
+    { title: "Máxima visibilidad 24/7", text: "Tu anuncio en pantalla todos los días, a toda hora, con más de 150 reproducciones diarias por video." },
+    { title: "Flexibilidad", text: "Cambia tu anuncio rápido cuando lo necesites: promociones, lanzamientos o fechas especiales." },
+  ],
   plans: [
     { name: "FULL", price: 310, featured: false, items: ["4 videos de 10 segundos, con +150 repeticiones diarias por video.", "2 videos de 20 segundos, con +150 repeticiones diarias por video."] },
     { name: "INTERMEDIO", price: 160, featured: true, items: ["2 videos de 10 segundos, con +150 repeticiones diarias por video.", "1 video de 20 segundos, con +150 repeticiones diarias por video."] },
