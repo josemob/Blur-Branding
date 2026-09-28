@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Figerona (fuente de marca, self-hosted) ---- */
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figerona";
+  src: url("/fonts/Figerona-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-surface-base text-brand-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  :focus-visible {
+    outline: 2px solid #2e9cb4;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: #5a8490;
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Margen lateral de las secciones 2+ del Inicio. Cambiar aquí para ajustarlo en todas. */
+:root {
+  --home-gutter: 60px;
+}
+
+@layer utilities {
+  .container-x {
+    @apply mx-auto w-full px-5 md:px-10;
+  }
+  .gutter-x {
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .gutter-x {
+      padding-inline: 40px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .gutter-x {
+      padding-inline: var(--home-gutter);
+    }
+  }
+  .gutter-r {
+    padding-right: 20px;
+  }
+  @media (min-width: 768px) {
+    .gutter-r {
+      padding-right: 40px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .gutter-r {
+      padding-right: var(--home-gutter);
+    }
+  }
+}
