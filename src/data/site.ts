@@ -197,22 +197,30 @@ export const services = [
   },
 ];
 
+/**
+ * Testimonios reales de clientes (mensajes de WhatsApp), con su texto fiel: solo
+ * se corrigió ortografía y puntuación. Nombre + inicial del apellido, sin empresa.
+ */
 export const testimonials = [
   {
-    name: "Carlos M.",
-    text: "La transformación de nuestra imagen fue total. Captaron la esencia de nuestra consultora y nos entregaron un manual de marca tan sólido que ahora proyectamos una seguridad absoluta ante clientes internacionales. La formalidad en el proceso es impecable.",
+    name: "Ramón S.",
+    service: "Redes sociales",
+    text: "Excelente equipo, buen trabajo el que realizó Blur en este mes de junio. Quiero felicitarlos de todo corazón porque cada vez se han ido puliendo más, lo que se traduce en un éxito en las redes. Felicidades y sigan mejorando cada día más.",
   },
   {
-    name: "Elena R.",
-    text: "Necesitábamos un prototipo funcional para una ronda de inversión y el resultado superó nuestras expectativas. La fluidez de las interacciones y el cuidado en la experiencia de usuario (UI/UX) fueron clave para validar nuestra idea en tiempo récord.",
+    name: "Héctor R.",
+    service: "Redes sociales",
+    text: "Equipo increíble, gracias por su apoyo incondicional este año. Gracias, gracias, gracias por su increíble dedicación. Agradezco profundamente el compromiso y la energía de la mano de su líder de equipo, la Sra. Maricliny.",
   },
   {
-    name: "Ricardo V.",
-    text: "Buscábamos un sitio que no pareciera una plantilla genérica. El desarrollo es impecable: rápido, responsivo y visualmente impactante. Lograron el equilibrio perfecto entre estética de vanguardia y una navegación intuitiva que ha mejorado nuestra conversión.",
+    name: "Johana",
+    service: "Redes sociales",
+    text: "¡Mil gracias por su trabajo! Estoy súper contenta con lo que se hizo este mes de junio. De verdad estoy muy satisfecha.",
   },
   {
-    name: "Mariana C.",
-    text: "Migrar nuestra tienda a una plataforma personalizada era un reto técnico enorme. La configuración de dominios y la optimización del checkout nos ahorró semanas de errores. Es un equipo que entiende tanto el diseño como la arquitectura del negocio digital.",
+    name: "Gerardo D.",
+    service: "Cliente BLUR",
+    text: "Excelente todo.",
   },
 ];
 

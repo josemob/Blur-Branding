@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { InstagramLogo, TiktokLogo, Star, CaretLeft, CaretRight, ArrowUpRight } from "@phosphor-icons/react";
+import { InstagramLogo, TiktokLogo, CaretLeft, CaretRight, ArrowUpRight } from "@phosphor-icons/react";
 import { Reveal, Button, Img, Kicker, EASE } from "../components/ui";
 import ContactForm from "../components/ContactForm";
 import VideoReels from "../components/VideoReels";
@@ -283,10 +283,14 @@ function Portfolio() {
 }
 
 /* -------------------------- TESTIMONIALS -------------------------- */
-const AVATARS = [
-  "https://framerusercontent.com/images/5cnlPvtKPD7ij344vVh9FnprY.jpg?scale-down-to=512&width=2048&height=2048",
-  "https://framerusercontent.com/images/p7a4NfJSJjS42GJkdURvszRGZQ.jpg?scale-down-to=512&width=2048&height=2048",
-];
+/** "Ramón S." -> "RS"; "Johana" -> "J". */
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 
 function Testimonials() {
   const track = useRef<HTMLDivElement>(null);
@@ -328,24 +332,26 @@ function Testimonials() {
                 onScroll={onScroll}
                 className="flex h-full snap-x snap-mandatory gap-5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
-                {testimonials.map((t, i) => (
+                {testimonials.map((t) => (
                   <figure
                     key={t.name}
                     data-card
                     className="flex w-[88%] shrink-0 snap-start flex-col rounded-[10px] bg-surface-card sm:w-[calc(50%-10px)]"
                   >
-                    {/* Sin logo de Google: la ficha de BLUR en Google Maps aún no tiene reseñas publicadas. */}
-                    <div className="flex items-center gap-3 border-b border-black/10 p-5">
-                      <Img src={AVATARS[i % 2]} sizes={SIZES.avatar} className="h-10 w-10 rounded-full object-cover" />
+                    {/* Testimonios reales (WhatsApp): iniciales en vez de fotos de stock y el servicio
+                        contratado en vez de estrellas, porque los clientes no dieron una calificación. */}
+                    <figcaption className="flex items-center gap-3 border-b border-black/10 p-5">
+                      <span
+                        aria-hidden
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-teal font-display text-sm font-semibold text-white"
+                      >
+                        {initials(t.name)}
+                      </span>
                       <div>
                         <p className="text-[15px] font-semibold text-brand-ink">{t.name}</p>
-                        <div className="mt-0.5 flex gap-0.5 text-[#f5b301]" aria-label="5 de 5 estrellas">
-                          {Array.from({ length: 5 }).map((_, k) => (
-                            <Star key={k} size={14} weight="fill" />
-                          ))}
-                        </div>
+                        <p className="mt-0.5 text-[13px] text-black/50">{t.service}</p>
                       </div>
-                    </div>
+                    </figcaption>
                     <blockquote className="p-5 text-sm leading-relaxed text-black/70">“{t.text}”</blockquote>
                   </figure>
                 ))}
