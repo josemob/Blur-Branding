@@ -5,8 +5,8 @@
 //   /admin/config.yml         → inyecta el dominio actual como base_url del login,
 //                               así el panel funciona en workers.dev o en el dominio final.
 //
-// Secretos (Cloudflare → Worker → Settings → Variables and Secrets):
-//   GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET  (de la OAuth App de GitHub)
+// Configuración: GITHUB_CLIENT_ID (público) va en wrangler.jsonc; GITHUB_CLIENT_SECRET
+// es un secreto en Cloudflare → Worker → Configuración → Variables y secretos.
 
 const COOKIE = "blur-cms-csrf";
 
@@ -32,7 +32,7 @@ export default {
 function auth(url, env) {
   if (url.searchParams.get("provider") !== "github") return page(url, { error: "Proveedor no soportado.", code: "UNSUPPORTED_BACKEND" });
   if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
-    return page(url, { error: "Falta configurar GITHUB_CLIENT_ID y GITHUB_CLIENT_SECRET en el Worker.", code: "MISCONFIGURED_CLIENT" });
+    return page(url, { error: "Falta configurar el secreto GITHUB_CLIENT_SECRET en el Worker (Cloudflare → Configuración → Variables y secretos).", code: "MISCONFIGURED_CLIENT" });
   }
   const state = crypto.randomUUID().replaceAll("-", "");
   const params = new URLSearchParams({

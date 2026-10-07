@@ -1,11 +1,15 @@
 // Cloudflare Workers. `npm run build` genera dist/ (HTML prerenderizado por ruta),
 // que se sirve como archivos estáticos. worker/index.js solo atiende el inicio de
 // sesión con GitHub del panel /admin (/api/*) y su config.yml.
-// Secretos en el panel de Cloudflare (no aquí): GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET.
+// Secreto en el panel de Cloudflare (nunca aquí): GITHUB_CLIENT_SECRET.
 {
   "name": "blur-branding",
   "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
+  // ID público de la OAuth App "BLUR Panel de contenido" (no es secreto: viaja en la URL de GitHub)
+  "vars": {
+    "GITHUB_CLIENT_ID": "Ov23li0e0xgb6oFJLWMf"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
