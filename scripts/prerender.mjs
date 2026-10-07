@@ -114,7 +114,7 @@ await writeFile(
   join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`
 );
-await writeFile(join(DIST, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+await writeFile(join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 
 console.log(`\n${ok} páginas prerenderizadas + 404.html + app.html, sitemap con ${urls.length} URLs, ${[...ogCache.values()].filter(Boolean).length} imágenes OG.`);
 if (!(await exists(join(DIST, "media")))) console.warn("Aviso: dist/media no existe; corre `npm run media` antes del build.");

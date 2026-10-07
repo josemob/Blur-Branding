@@ -199,19 +199,19 @@ export const services = [
 
 export const testimonials = [
   {
-    name: "Carlos Méndez",
+    name: "Carlos M.",
     text: "La transformación de nuestra imagen fue total. Captaron la esencia de nuestra consultora y nos entregaron un manual de marca tan sólido que ahora proyectamos una seguridad absoluta ante clientes internacionales. La formalidad en el proceso es impecable.",
   },
   {
-    name: "Elena Rodríguez",
+    name: "Elena R.",
     text: "Necesitábamos un prototipo funcional para una ronda de inversión y el resultado superó nuestras expectativas. La fluidez de las interacciones y el cuidado en la experiencia de usuario (UI/UX) fueron clave para validar nuestra idea en tiempo récord.",
   },
   {
-    name: "Ricardo Valles",
-    text: "Buscábamos un sitio que no pareciera una plantilla genérica. El desarrollo en Framer es impecable: rápido, responsivo y visualmente impactante. Lograron el equilibrio perfecto entre estética de vanguardia y una navegación intuitiva que ha mejorado nuestra conversión.",
+    name: "Ricardo V.",
+    text: "Buscábamos un sitio que no pareciera una plantilla genérica. El desarrollo es impecable: rápido, responsivo y visualmente impactante. Lograron el equilibrio perfecto entre estética de vanguardia y una navegación intuitiva que ha mejorado nuestra conversión.",
   },
   {
-    name: "Mariana Costa",
+    name: "Mariana C.",
     text: "Migrar nuestra tienda a una plataforma personalizada era un reto técnico enorme. La configuración de dominios y la optimización del checkout nos ahorró semanas de errores. Es un equipo que entiende tanto el diseño como la arquitectura del negocio digital.",
   },
 ];

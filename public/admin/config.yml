@@ -1,0 +1,119 @@
+# Panel de contenido de BLUR (Sveltia CMS) — https://blurbranding.agency/admin
+# Cada proyecto se guarda como un JSON en content/proyectos y las imágenes en
+# public/uploads. Al publicar, el CMS hace un commit en GitHub y Cloudflare
+# vuelve a compilar el sitio (1–2 minutos) con el proyecto ya prerenderizado.
+
+backend:
+  name: github
+  repo: josemob/Blur-Branding
+  branch: main
+  commit_messages:
+    create: "contenido: nuevo proyecto «{{slug}}»"
+    update: "contenido: actualiza proyecto «{{slug}}»"
+    delete: "contenido: elimina proyecto «{{slug}}»"
+    uploadMedia: "contenido: sube {{path}}"
+    deleteMedia: "contenido: elimina {{path}}"
+
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://blurbranding.agency
+display_url: https://blurbranding.agency
+logo_url: /favicon.png
+
+collections:
+  - name: proyectos
+    label: Proyectos del portafolio
+    label_singular: Proyecto
+    description: Cada proyecto aparece en /portafolio y tiene su propia página en /work-detail/…
+    folder: content/proyectos
+    format: json
+    create: true
+    delete: true
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}} · {{tag}} · {{date}}"
+    sortable_fields: [date, title, tag]
+    fields:
+      - name: title
+        label: Título
+        widget: string
+        hint: "Formato recomendado «Marca – descripción», p. ej. «Café Linaje – Estrategia de contenido». La marca se muestra como subtítulo."
+      - name: tag
+        label: Categoría
+        widget: select
+        options:
+          - Branding
+          - Diseño Web
+          - Redes sociales
+          - Audiovisuales
+          - Material Impreso
+          - Pantalla LED
+          - Sesión fotográfica
+          - Cobertura de eventos
+      - name: date
+        label: Fecha de publicación
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: DD/MM/YYYY
+        time_format: false
+      - name: cover
+        label: Imagen de portada
+        widget: image
+        hint: "Horizontal, idealmente 1600 px de ancho o más. Se optimiza sola al publicar."
+      - name: lead
+        label: Bajada (opcional)
+        widget: text
+        required: false
+        hint: Una o dos frases que resumen el proyecto; aparece bajo el título.
+      - name: intro
+        label: Introducción
+        widget: text
+      - name: highlight
+        label: Lo destacado (opcional)
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: title, label: Título, widget: string, required: false }
+          - { name: text, label: Texto, widget: text, required: false }
+      - name: listTitle
+        label: Título de la lista
+        widget: string
+        hint: "P. ej. «¿Qué hicimos?» o «Nuestra estrategia»."
+      - name: items
+        label: Puntos de la lista
+        label_singular: Punto
+        widget: list
+        min: 1
+        fields:
+          - { name: label, label: Título del punto, widget: string }
+          - { name: text, label: Descripción, widget: text }
+      - name: closing
+        label: Párrafos de cierre (opcional)
+        label_singular: Párrafo
+        widget: list
+        required: false
+        field: { name: paragraph, label: Párrafo, widget: text }
+      - name: gallery
+        label: Galería (opcional)
+        label_singular: Imagen
+        widget: list
+        required: false
+        field: { name: image, label: Imagen, widget: image }
+      - name: video
+        label: Video (opcional)
+        widget: file
+        required: false
+        hint: "MP4 de menos de 25 MB (límite de Cloudflare). Comprímelo antes de subirlo."
+      - name: orden
+        label: Orden (opcional)
+        widget: number
+        value_type: int
+        required: false
+        hint: Entre proyectos con la misma fecha, el número menor aparece primero.
+      - name: slug
+        label: URL personalizada (opcional)
+        widget: string
+        required: false
+        hint: "Déjalo vacío: se usa el nombre del archivo. Solo cámbialo si sabes lo que haces (cambiar la URL de un proyecto publicado rompe los enlaces)."
