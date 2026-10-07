@@ -25,3 +25,6 @@ dist-ssr
 
 # Estado local de wrangler dev
 .wrangler
+
+# Variables locales de wrangler dev
+.dev.vars

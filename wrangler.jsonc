@@ -1,10 +1,16 @@
-// Cloudflare Workers: sitio 100% estático. `npm run build` genera dist/ (HTML
-// prerenderizado por ruta) y wrangler solo lo publica, sin código de servidor.
+// Cloudflare Workers. `npm run build` genera dist/ (HTML prerenderizado por ruta),
+// que se sirve como archivos estáticos. worker/index.js solo atiende el inicio de
+// sesión con GitHub del panel /admin (/api/*) y su config.yml.
+// Secretos en el panel de Cloudflare (no aquí): GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET.
 {
   "name": "blur-branding",
+  "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    // Solo estas rutas pasan por el código; el resto se sirve directo
+    "run_worker_first": ["/api/*", "/admin/config.yml"],
     // /services se sirve desde dist/services/index.html, sin barra final
     // (igual que las URLs canónicas y las del sitio original)
     "html_handling": "drop-trailing-slash",

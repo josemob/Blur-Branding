@@ -7,6 +7,10 @@ backend:
   name: github
   repo: josemob/Blur-Branding
   branch: main
+  # Inicio de sesión con GitHub vía el Worker del sitio (worker/index.js).
+  # El Worker reemplaza __SITE_ORIGIN__ por el dominio actual al servir este archivo.
+  base_url: __SITE_ORIGIN__
+  auth_endpoint: api/auth
   commit_messages:
     create: "contenido: nuevo proyecto «{{slug}}»"
     update: "contenido: actualiza proyecto «{{slug}}»"
